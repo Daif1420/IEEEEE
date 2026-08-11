@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intercom IEMS | إدارة الموظفين</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" alt="Intercom" class="topbar-logo">
+      <div class="brand-copy"><span>IEMS</span><small>SHIFT A · EMPLOYEE MANAGEMENT</small></div>
+    </div>
+    <div class="topbar-right">
+      <a class="ghost-btn" href="/dashboard.html">↩ لوحة المتابعة</a>
+      <button class="icon-btn" id="theme-toggle" title="تغيير المظهر" aria-label="تغيير المظهر">☾</button>
+      <div class="user-chip">
+        <div class="avatar" id="chip-avatar">?</div>
+        <div><div class="name" id="chip-name">—</div><div class="role" id="chip-role">—</div></div>
+      </div>
+      <button class="logout-btn" id="logout-btn">خروج</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <div><span class="eyebrow">EMPLOYEE MANAGEMENT</span><h1>إدارة الموظفين</h1><p>عرض بيانات كل الموظفين، تعديل الـID والاسم، تغيير كلمات المرور، أو حذف موظف.</p></div>
+      <div class="live-pill"><span></span> Live Data</div>
+    </div>
+
+    <section class="emp-search-row">
+      <input type="text" id="emp-search" placeholder="ابحث بالاسم أو الـID...">
+      <div class="emp-count" id="emp-count">—</div>
+    </section>
+
+    <section class="panel emp-table-panel">
+      <div class="table-wrap">
+        <table class="emp-mgmt-table">
+          <thead><tr><th>ID</th><th>الاسم</th><th>الشركة</th><th>الوردية</th><th>القسم</th><th>الفئة</th><th></th></tr></thead>
+          <tbody id="emp-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="legal">Intercom IEMS · Internal Dashboard</footer>
+  </main>
+</div>
+
+<!-- View-as-employee modal: shows exactly what the employee sees -->
+<div class="modal-overlay" id="view-modal">
+  <div class="modal-card modal-card-wide">
+    <div class="modal-card-head"><h3 id="view-modal-title">بيانات الموظف</h3><button class="modal-close" id="view-modal-close">✕</button></div>
+    <div class="my-rank-banner" id="view-rank-banner" style="display:none"></div>
+    <div class="emp-info-card" id="view-emp-info"></div>
+    <div class="table-wrap" style="margin-top:16px"><table><thead><tr id="view-detail-head"></tr></thead><tbody id="view-detail-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- Edit ID / name modal -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal-card">
+    <h3>تعديل بيانات الموظف</h3>
+    <div class="field"><label for="edit-id">ID</label><input type="text" id="edit-id" inputmode="numeric"></div>
+    <div class="field"><label for="edit-name">الاسم</label><input type="text" id="edit-name"></div>
+    <div class="modal-error" id="edit-error"></div>
+    <div class="modal-actions"><button class="cancel" id="edit-cancel">إلغاء</button><button class="save" id="edit-save">حفظ</button></div>
+  </div>
+</div>
+
+<!-- Change password modal -->
+<div class="modal-overlay" id="pw-modal">
+  <div class="modal-card">
+    <h3>تغيير كلمة مرور الموظف</h3>
+    <p class="muted" style="margin-bottom:12px">اتركها فارغة لتوليد كلمة مرور قوية عشوائية.</p>
+    <div class="field"><label for="pw-new">كلمة المرور الجديدة (اختياري)</label><input type="text" id="pw-new" placeholder="اتركها فارغة للتوليد التلقائي"></div>
+    <div class="modal-error" id="pw-error"></div>
+    <div class="modal-actions"><button class="cancel" id="pw-cancel">إلغاء</button><button class="save" id="pw-save">حفظ</button></div>
+  </div>
+</div>
+
+<!-- Result banner for generated passwords -->
+<div class="modal-overlay" id="result-modal">
+  <div class="modal-card">
+    <h3 id="result-title">تم بنجاح</h3>
+    <p id="result-text" style="font-size:13px;line-height:1.8"></p>
+    <div class="modal-actions"><button class="save" id="result-ok" style="flex:1">تمام</button></div>
+  </div>
+</div>
+
+<!-- Delete confirmation -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal-card">
+    <h3>حذف الموظف</h3>
+    <p class="muted" id="delete-text" style="margin-bottom:12px"></p>
+    <div class="modal-error" id="delete-error"></div>
+    <div class="modal-actions"><button class="cancel" id="delete-cancel">إلغاء</button><button class="save danger-save" id="delete-confirm">حذف نهائي</button></div>
+  </div>
+</div>
+
+<script src="app-admin-employees.js"></script>
+</body>
+</html>

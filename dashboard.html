@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intercom IEMS | Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" alt="Intercom" class="topbar-logo">
+      <div class="brand-copy"><span>IEMS</span><small>SHIFT A · EMPLOYEE PERFORMANCE</small></div>
+    </div>
+    <div class="topbar-right">
+      <a class="ghost-btn" id="nav-employees" href="/admin-employees.html" style="display:none">إدارة الموظفين</a>
+      <button class="icon-btn" id="theme-toggle" title="تغيير المظهر" aria-label="تغيير المظهر">☾</button>
+      <div class="user-chip">
+        <div class="avatar" id="chip-avatar">?</div>
+        <div><div class="name" id="chip-name">—</div><div class="role" id="chip-role">—</div></div>
+      </div>
+      <button class="ghost-btn" id="pw-open-btn">تغيير كلمة المرور</button>
+      <button class="logout-btn" id="logout-btn">خروج</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <div><span class="eyebrow">EMPLOYEE MANAGEMENT</span><h1>لوحة متابعة الموظفين</h1><p>متابعة الحضور والأداء وأفضل الموظفين حسب المرحلة والفترة المختارة.</p></div>
+      <div class="live-pill"><span></span> Live Data</div>
+    </div>
+
+    <div class="pw-banner" id="pw-banner" style="display:none"><span>يُفضّل تغيير كلمة المرور المؤقتة.</span><button id="pw-banner-btn">تغيير الآن</button></div>
+
+    <section class="filters">
+      <div class="filter-head"><div><h2>الفلاتر</h2><span>اختار الفترة والمرحلة بدون كتابة التاريخ يدويًا</span></div><button class="reset-btn" id="reset-btn">إعادة تعيين</button></div>
+      <div class="filter-grid">
+        <div class="field"><label for="f-from">من تاريخ</label><input type="date" id="f-from"></div>
+        <div class="field"><label for="f-to">إلى تاريخ</label><input type="date" id="f-to"></div>
+        <div class="field"><label for="f-stage">المرحلة</label><select id="f-stage"></select></div>
+        <button class="apply-btn" id="apply-btn">تطبيق</button>
+      </div>
+    </section>
+
+    <section class="admin-upload-card" id="admin-upload-card" style="display:none">
+      <div class="admin-upload-head"><div><div class="admin-upload-title">تحديث بيانات Master</div><div class="admin-upload-sub">ارفع ملف Excel الأصلي لتحديث الموظفين والأداء والحضور.</div></div><span class="admin-badge">ADMIN</span></div>
+      <div class="admin-upload-row"><input type="file" id="master-file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"><button class="upload-btn" id="master-upload-btn">رفع وتحديث</button></div>
+      <div class="upload-status" id="master-upload-status"></div><div class="upload-credentials" id="master-upload-credentials" style="display:none"></div>
+    </section>
+
+    <div class="my-rank-banner" id="my-rank-banner" style="display:none"></div>
+
+    <section class="overview-grid" id="overview-grid" style="display:none"></section>
+
+    <section class="dashboard-grid" id="self-view-grid" style="display:none">
+      <div class="panel employee-panel">
+        <div class="panel-head"><div><span class="eyebrow">EMPLOYEE</span><h2>بيانات الموظف</h2></div></div>
+        <div class="emp-info-card" id="emp-info-card"></div>
+      </div>
+      <div class="panel attendance-panel">
+        <div class="panel-head"><div><span class="eyebrow">ATTENDANCE</span><h2>أيام الحضور</h2></div></div>
+        <div class="attendance-big" id="attendance-big">—</div><div class="muted">خلال الفترة المختارة</div>
+      </div>
+    </section>
+
+    <section class="panel top5-panel" id="top5-panel" style="display:none">
+      <div class="panel-head top5-head"><div><span class="eyebrow">PERFORMANCE RANKING</span><h2>Top 5 لكل مرحلة</h2><p>يتم تجميع الإنجاز اليومي من Master داخل الفترة المختارة.</p></div><div class="stage-chip" id="top5-range">—</div></div>
+      <div id="top5-container" class="top5-container"></div>
+    </section>
+
+    <section class="panel detail-panel" id="detail-panel" style="display:none">
+      <div class="panel-head"><div><span class="eyebrow">DAILY DETAIL</span><h2>التفاصيل اليومية</h2></div></div>
+      <div class="table-wrap"><table><thead><tr id="detail-head"></tr></thead><tbody id="detail-body"></tbody></table></div>
+    </section>
+    <footer class="legal">Intercom IEMS · Internal Dashboard</footer>
+  </main>
+</div>
+
+<div class="modal-overlay" id="pw-modal"><div class="modal-card"><h3>تغيير كلمة المرور</h3><p class="force-pw-note" id="pw-force-note" style="display:none">مطلوب تغيير كلمة المرور المؤقتة قبل المتابعة.</p><div class="field"><label for="pw-current">كلمة المرور الحالية</label><input type="password" id="pw-current"></div><div class="field"><label for="pw-new">كلمة المرور الجديدة</label><input type="password" id="pw-new"></div><div class="modal-error" id="pw-error"></div><div class="modal-actions"><button class="cancel" id="pw-cancel">إلغاء</button><button class="save" id="pw-save">حفظ</button></div></div></div>
+<script src="app-dashboard.js"></script>
+</body>
+</html>
