@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intercom IEMS | تسجيل الدخول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-blue: #0052cc;
+    --accent-red: #e53935;
+    --accent-yellow: #ffb300;
+    --bg-dark: #0a192f;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  body {
+    background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, var(--bg-dark) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* أشكال خلفية عصرية ناعمة */
+  body::before, body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+  }
+  body::before {
+    width: 300px;
+    height: 300px;
+    background: rgba(229, 57, 53, 0.15);
+    top: 10%;
+    right: 15%;
+  }
+  body::after {
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 179, 0, 0.12);
+    bottom: 10%;
+    left: 15%;
+  }
+
+  #login-screen {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  /* تصميم بطاقة دخول عصري بانحناءات مميزة */
+  .login-card {
+    background: var(--card-bg);
+    padding: 40px 32px;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* شريط ملون علوي مستوحى من ألوان اللوجو */
+  .login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-yellow) 0%, var(--accent-red) 50%, var(--primary-blue) 100%);
+  }
+
+  .logo-container {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .logo-container img {
+    max-width: 210px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .login-brand .dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    color: var(--text-main);
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  p.sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 14px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.25s ease;
+    background-color: #f8fafc;
+  }
+
+  .field input:focus {
+    border-color: var(--primary-blue);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 82, 204, 0.1);
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px -4px rgba(0, 82, 204, 0.3);
+  }
+
+  .login-btn:hover {
+    background-color: #0041a3;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -4px rgba(0, 82, 204, 0.4);
+  }
+
+  .login-btn:active {
+    transform: translateY(0);
+  }
+
+  .login-error {
+    margin-top: 16px;
+    color: var(--accent-red);
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    
+    <!-- منطقة اللوجو -->
+    <div class="logo-container">
+      <!-- استبدل logo.png بمسار صورة اللوجو لديك -->
+      <img src="logo.png" alt="Intercom Logo">
+    </div>
+
+    <div class="login-brand">
+      <span class="dot"></span>
+      <span>IEMS &middot; SHIFT A</span>
+    </div>
+
+    <h1>تسجيل الدخول</h1>
+    <p class="sub">أدخل الرقم التعريفي (ID) وكلمة المرور لعرض بيانات الأداء الخاصة بك.</p>
+    
+    <div class="field">
+      <label for="login-id">الرقم التعريفي (ID)</label>
+      <input type="text" id="login-id" inputmode="numeric" placeholder="مثال: 1026" autocomplete="username">
+    </div>
+
+    <div class="field">
+      <label for="login-pass">كلمة المرور</label>
+      <input type="password" id="login-pass" placeholder="••••••" autocomplete="current-password">
+    </div>
+
+    <button class="login-btn" id="login-btn">دخول</button>
+    <div class="login-error" id="login-error"></div>
+
+  </div>
+</div>
+
+<script src="app-login.js"></script>
+</body>
+</html>
